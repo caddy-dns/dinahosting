@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/caddyserver/caddy/v2 v2.5.2
-	github.com/libdns/dinahosting v0.0.0
+	github.com/libdns/dinahosting v1.0.0
 
 )
 
@@ -48,5 +48,3 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 )
-
-

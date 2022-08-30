@@ -3,11 +3,11 @@ package dinahosting
 import (
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-	libdnstemplate "github.com/libdns/dinahosting"
+	"github.com/libdns/dinahosting"
 )
 
 // Provider lets Caddy read and manipulate DNS records hosted by this DNS provider.
-type Provider struct{ *libdnstemplate.Provider }
+type Provider struct{ *dinahosting.Provider }
 
 func init() {
 	caddy.RegisterModule(Provider{})
@@ -17,7 +17,7 @@ func init() {
 func (Provider) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "dns.providers.dinahosting",
-		New: func() caddy.Module { return &Provider{new(libdnstemplate.Provider)} },
+		New: func() caddy.Module { return &Provider{new(dinahosting.Provider)} },
 	}
 }
 
@@ -33,10 +33,10 @@ func (p *Provider) Provision(ctx caddy.Context) error {
 
 // UnmarshalCaddyfile sets up the DNS provider from Caddyfile tokens. Syntax:
 //
-//		dinahosting {
-//		 username <YOUR_USERNAME>
-//	     password <YOUR_PASSWORD>
-//		}
+//	dinahosting {
+//		username <YOUR_USERNAME>
+//		password <YOUR_PASSWORD>
+//	}
 func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 
 	for d.Next() {
@@ -53,7 +53,7 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 			switch d.Val() {
 			case "username":
 				if p.Provider.Username != "" {
-					return d.Err("Username already set")
+					return d.Err("username already set")
 				}
 				if d.NextArg() {
 					p.Provider.Username = d.Val()
@@ -63,7 +63,7 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 				}
 			case "password":
 				if p.Provider.Password != "" {
-					return d.Err("User already set")
+					return d.Err("password already set")
 				}
 				if d.NextArg() {
 					p.Provider.Password = d.Val()

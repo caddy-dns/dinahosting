@@ -3,7 +3,7 @@ package dinahosting
 import (
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-	"github.com/libdns/dinahosting"
+	"github.com/libdns/dinahosting/v2"
 )
 
 // Provider lets Caddy read and manipulate DNS records hosted by this DNS provider.
